@@ -1,24 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InputMask } from "@react-input/mask";
 import type { AddressFromCep } from "../types";
 import { getCep } from "../product.service";
+import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
 export function ShippingAvailability() {
-  const [cep, setCep] = useState<string>();
+  const [userCep, setUserCep] = useState<string>();
   const [address, setAddress] = useState<AddressFromCep>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  async function fetchCep() {
+  async function fetchCep(cep: string | undefined) {
     if (!cep) return;
-
+    setIsLoading(true);
     try {
       setAddress(await getCep(cep));
+      Cookies.set("userCep", cep, { expires: 1 / 24 });
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
       }
+    } finally {
+      setIsLoading(false);
     }
   }
+
+  function resetCep() {
+    setAddress(undefined);
+    Cookies.remove("userCep");
+  }
+
+  useEffect(() => {
+    fetchCep(Cookies.get("userCep"));
+  }, []);
+
+  if (isLoading) <p>Consultando...</p>;
 
   if (address)
     return (
@@ -33,7 +49,7 @@ export function ShippingAvailability() {
 
         <button
           className="hover:underline text-gray-400 hover:text-black cursor-pointer font-serif"
-          onClick={() => setAddress(undefined)}
+          onClick={resetCep}
           type="button"
         >
           Fazer uma nova consulta
@@ -48,15 +64,15 @@ export function ShippingAvailability() {
         <InputMask
           mask="_____-___"
           replacement={{ _: /\d/ }}
-          value={cep}
-          onChange={(e) => setCep(e.target.value)}
+          value={userCep}
+          onChange={(e) => setUserCep(e.target.value)}
           placeholder="00000-000"
           id="cep"
           className="border border-gray-100 focus:border-gray-300 outline-gray-300 p-2 rounded"
         />
 
         <button
-          onClick={fetchCep}
+          onClick={() => fetchCep(userCep)}
           type="button"
           className="border border-gray-100 hover:border-gray-300 cursor-pointer px-4 rounded"
         >

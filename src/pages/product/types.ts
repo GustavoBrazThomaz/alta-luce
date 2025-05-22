@@ -3,7 +3,6 @@ export interface Product {
   name: string;
   description: string;
   price: string;
-  images: string[];
   sizes: Size[];
   colors: Color[];
 }
@@ -17,6 +16,7 @@ export interface Color {
   name: string;
   hex: string;
   disabled: boolean;
+  images: string[];
 }
 
 export type AddressFromCep = {
