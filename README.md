@@ -16,23 +16,23 @@ git clone https://github.com/GustavoBrazThomaz/alta-luce.git
 ```
 
 # Acesse a pasta do projeto
-
+```bash
 cd alta-luce
-
+```
 # Instale as dependências
-
+```bash
 npm install
 
-# ou
+ou
 
 yarn
-
+```
 # Rode o projeto em modo de desenvolvimento
-
+```bash
 npm run dev
 
-# ou
+ou
 
 yarn dev
-
+```
 A aplicação estará disponível em: http://localhost:5173
