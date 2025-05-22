@@ -22,17 +22,17 @@ cd alta-luce
 # Instale as dependências
 ```bash
 npm install
-
+```
 ou
-
+```bash
 yarn
 ```
 # Rode o projeto em modo de desenvolvimento
 ```bash
 npm run dev
-
+```
 ou
-
+```bash
 yarn dev
 ```
 A aplicação estará disponível em: http://localhost:5173
