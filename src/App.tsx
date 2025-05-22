@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <AppBar />
-      <div className="px-96 mt-8">
+      <div className="px-[20%] max-2xl:px-[15%] max-xl:px-[10%] max-lg:px-[5%] my-8">
         <ProductPage />
       </div>
       <Toaster position="bottom-center" reverseOrder={false} />

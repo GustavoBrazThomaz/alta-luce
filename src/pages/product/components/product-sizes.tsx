@@ -10,7 +10,7 @@ export function ProductSizes({ sizes }: { sizes: Size[] }) {
       <div className="flex gap-4 mt-2">
         {sizes.map((item, index) => (
           <button
-            className={`p-2 size-12 font-bold rounded-full border  cursor-pointer disabled:text-gray-300 disabled:cursor-default ${
+            className={`p-2 size-12 font-bold rounded-full border  cursor-pointer disabled:text-gray-300 disabled:cursor-not-allowed ${
               selectedSize === index ? "border-gray-300" : "border-gray-100"
             }`}
             onClick={() => setSelectedSize(index)}

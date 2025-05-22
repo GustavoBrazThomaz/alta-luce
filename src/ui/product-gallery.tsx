@@ -10,21 +10,22 @@ export function ProductGallery({
   const [selectedImage, setSelectedImage] = useState<number>(0);
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 max-md:w-full">
       <img
         src={images[selectedImage]}
         alt={`Imagem principal do produto: ${alt}`}
         role="figure"
+        className=" max-sm:max-w-full pointer-events-none"
       />
-      <ul className="flex gap-4" role="list">
+      <ul className="flex gap-2  max-sm:max-w-full" role="list">
         {images.map((image, index) => (
           <li role="listitem">
             <button
-              className={"size-26 cursor-pointer"}
+              className={"aspect-square cursor-pointer group"}
               onClick={() => setSelectedImage(index)}
             >
               <img
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition "
                 src={image}
                 alt={`Miniatura ${index + 1} do produto: ${alt}`}
               />
